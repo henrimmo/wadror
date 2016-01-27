@@ -16,9 +16,9 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    
+    <%= form_for(@beer) do |f| %>
       <%= f.select :style, options_for_select(@styles) %>
-
+<% end %>
   </div>
   <div class="field">
 <%= form_for(@beer) do |f| %>
