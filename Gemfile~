@@ -53,4 +53,10 @@ group :production do
    gem 'rails_12factor'
 end
 
+group :development, :test do
+  gem "better_errors"
+
+  #...
+end
+
 ruby '2.3.0'
