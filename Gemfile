@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
+gem 'rspec-its'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -57,6 +58,17 @@ group :development, :test do
   gem "better_errors"
 
   #...
+end
+
+group :developement, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 ruby '2.3.0'

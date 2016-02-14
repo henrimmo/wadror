@@ -7,8 +7,11 @@
 
 <ul>
   <% @ratings.each do |rating| %>
-    <li> <%= rating %> <%= link_to rating.user, rating.user %> </li>
+    <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
   <% end %> 
 </ul>
 
+
+<% if current_user %>
 <%= link_to 'New rating', new_rating_path %>
+<% end %>

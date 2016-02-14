@@ -1,2 +1,0 @@
-Link to heroku : http://serene-ravine-22341.herokuapp.com/breweries
-
