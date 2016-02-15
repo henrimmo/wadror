@@ -1,4 +1,5 @@
 class BeermappingApi
+  
   def self.places_in(city)
     url = "http://beermapping.com/webservice/loccity/#{key}/"
 
