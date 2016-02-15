@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
 
+  get 'places', to: 'places#index'
   get 'signin', to: 'sessions#new'
   get 'signout', to: 'sessions#destroy'
   get 'signup', to: 'users#new'
+  get 'joinclub', to: 'memberships#new'
+  post 'places', to:'places#search'
 
   root 'breweries#index'
   

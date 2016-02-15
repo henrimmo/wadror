@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rspec-its'
+gem 'httparty'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -69,6 +70,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 ruby '2.3.0'

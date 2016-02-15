@@ -16,7 +16,6 @@ describe "User" do
 
     it "is redirected back to signin form if wrong credentials given" do
       sign_in(username:"Pekka", password:"asd")
-      save_and_open_page
       expect(current_path).to eq(signin_path)
       expect(page).to have_content 'Username and/or password mismatch'
     end

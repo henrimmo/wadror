@@ -11,13 +11,14 @@
   <% else %>
     Has <%= pluralize(@user.ratings.count, 'rating') %>, average 
     <%= @user.average_rating %>
+	<h2>
+Ratings
+</h2>
+
   <% end %>
 </p>
 
 
-<h2>
-Ratings
-</h2>
 
 <ul>
 <% @user.ratings.each do |rating| %>
