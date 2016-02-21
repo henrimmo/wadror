@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :breweries
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
+  resources :places, only:[:index, :show]
 
   get 'places', to: 'places#index'
   get 'signin', to: 'sessions#new'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'joinclub', to: 'memberships#new'
   post 'places', to:'places#search'
+
 
   root 'breweries#index'
   
