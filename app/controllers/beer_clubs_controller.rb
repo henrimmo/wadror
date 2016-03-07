@@ -1,6 +1,7 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy]
-   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: [:delete]
 
   # GET /beer_clubs
   # GET /beer_clubs.json
@@ -11,8 +12,8 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-    if @beer_club.members.include? current_user
-      @membership = @beer_club.memberships.find_by user_id:current_user.id
+    if current_user and current_user.in? @beer_club.members
+      @membership = @beer_club.memberships.find{ |m| m.user = current_user}
     else
       @membership = Membership.new
       @membership.beer_club = @beer_club
@@ -76,6 +77,6 @@ class BeerClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def beer_club_params
-      params.require(:beer_club).permit(:name, :founded, :city)
+      params.require(:beer_club).permit(:name, :city, :founded)
     end
 end

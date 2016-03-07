@@ -3,11 +3,7 @@ module RatingAverage
 
 
   def average_rating
-    a=ratings.to_a
-    summa = []
-    a.each do |alkio|
-        summa << alkio.score
-      end 
-    summa.inject{ |sum, el| sum + el }.to_f / summa.size
-  end 
+    return 0 if ratings.count == 0
+    ratings.inject(0.0){ |sum, r| sum+r.score } / ratings.count
+  end
 end

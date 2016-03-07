@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    @ratings = Rating.all
   end
 
   # GET /users/1
@@ -42,7 +41,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
+      if user_params[:username].nil? and current_user == @user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -55,12 +54,23 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy if current_user == @user
+    if current_user == @user
+      @user.destroy
+      #session[:user_id] = nil
+    end
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
-      reset_session
     end
+  end
+
+  def toggle_lock
+    user = User.find(params[:id])
+    user.update_attribute :locked, (not user.locked)
+
+    new_status = user.locked? ? "unlocked" : "locked"
+
+    redirect_to :back, notice:"user account #{new_status}"
   end
 
   private

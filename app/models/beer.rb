@@ -1,25 +1,20 @@
 class Beer < ActiveRecord::Base
-	include RatingAverage
+  include RatingAverage
 
-	belongs_to :style
-	belongs_to :brewery
-	has_many :ratings, dependent: :destroy
-	has_many :raters, through: :ratings, source: :user
+  validates :name, presence: true
+  validates :style, presence: true
 
-	validates :name, presence: true
-	validates :style, presence: true
+  belongs_to :brewery
+  belongs_to :style
+  has_many :ratings, dependent: :destroy
+  has_many :raters, -> { uniq }, through: :ratings, source: :user
 
+  def self.top(n)
+    sorted_by_rating_average = Beer.all.sort_by{ |b| -(b.average_rating || 0) }
+    sorted_by_rating_average[0, n]
+  end
 
-	def to_s
-		x = self.name
-		y = brewery.name
-		"#{x} (#{y})"
-
-
-	end
-
-	def average
-		return 0 if ratings.empty?
-		ratings.map{ |r| r.score}.sum / ratings.count.to_f
-	end
+  def to_s
+    "#{name} #{brewery.name}"
+  end
 end
